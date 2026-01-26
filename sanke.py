@@ -42,8 +42,53 @@ window.geometry(f"{window_width}x{window_height}+{window_x}+{window_y}")
 #the game :
 snake = tile(5*TILE_SIZE, 5*TILE_SIZE) # tile for sanke's head
 food =  tile(15*TILE_SIZE, 15*TILE_SIZE) # tile for food
+
+velocity_x = 0
+velocity_y = 0
+
+def change_direction(e): # e = event
+    #print(e)
+    #print(e.keysym)
+    global velocity_x, velocity_y
+    if e.keysym == "Up":
+        velocity_x = 0
+        velocity_y = -1
+    elif e.keysym == "Down":
+        velocity_x = 0
+        velocity_y = 1
+    elif e.keysym == "Left":
+        velocity_x = -1
+        velocity_y = 0
+    elif e.keysym == "Right":
+        velocity_x = 1
+        velocity_y = 0
+    elif e.keysym == "w":
+        velocity_x = 0
+        velocity_y = -1
+    elif e.keysym == "s":
+        velocity_x = 0
+        velocity_y = 1
+    elif e.keysym == "a":
+        velocity_x = -1
+        velocity_y = 0
+    elif e.keysym == "d":
+        velocity_x = 1
+        velocity_y = 0
+
+
+def move_snake():
+    global snake
+
+    snake.x += velocity_x * TILE_SIZE
+    snake.y += velocity_y * TILE_SIZE
+
+
 def draw():
     global snake
+    move_snake()
+    
+    canvas.delete("all") # clear the canvas before redrawing everything
+    
     #draw the snake
     canvas.create_rectangle(snake.x, snake.y, snake.x + TILE_SIZE, snake.y + TILE_SIZE, fill="green")
     
@@ -55,6 +100,7 @@ def draw():
 
 draw()
 
+window.bind("<KeyRelease>",change_direction) # for changing  the direction
 
 
 
