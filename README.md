@@ -1,2 +1,2 @@
 # snake-game
-its a sanke game 
+its a sanke game.. just started it
