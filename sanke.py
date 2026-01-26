@@ -98,6 +98,8 @@ def draw():
     
     window.after(100, draw) #  100ms meaning 10 frames / sec
 
+
+
 draw()
 
 window.bind("<KeyRelease>",change_direction) # for changing  the direction
